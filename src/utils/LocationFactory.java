@@ -30,11 +30,39 @@ public class LocationFactory {
         int dailyPrice = Integer.parseInt(tokens[4].trim());
         String activities = tokens[5];
 
+        LocationInterface parent;
+        String cityName;
+        String countyName;
+        String countryName;
+
         switch (tokens[1]) {
             default:
                 break;
             case "Oras":
-                locationInstance = new City(name, dailyPrice, dates, activities);
+                cityName = tokens[0];
+                countyName = tokens[2].split(" ")[1];
+                countryName = tokens[2].split(" ")[0];
+                if (world.getCountries().containsKey(countryName)) {
+                    parent = world.getCountries().get(countryName);
+                } else {
+                    parent = new Country(countryName);
+                    world.getCountries().put(countryName, parent);
+                }
+
+                if (parent.getSubdivisions().containsKey(countyName)) {
+                    parent = parent.getSubdivisions().get(countyName);
+                } else {
+                    LocationInterface aux = new Country(countyName);
+                    parent.getSubdivisions().put(countyName, aux);
+                    parent = aux;
+                }
+
+                if (parent.getSubdivisions().containsKey(cityName)) {
+
+                } else {
+                    locationInstance = new City(name, dailyPrice, dates, activities);
+                    parent.getSubdivisions().put(cityName, locationInstance);
+                }
                 break;
             case "Judet":
                 LocationInterface country;

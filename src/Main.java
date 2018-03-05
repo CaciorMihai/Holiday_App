@@ -12,10 +12,11 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        dateManagerTest();
-        readerTest();
+//        dateManagerTest();
+//        readerTest();
         hierarchyTest("./test_input_1");
         hierarchyTest("./test_input_2");
+        hierarchyTest("./test_input_3");
     }
 
     private static void hierarchyTest(final String filePath) {
@@ -31,6 +32,9 @@ public class Main {
             System.out.println("-> " + country.getKey());
             for (Map.Entry<String, LocationInterface> county : country.getValue().getSubdivisions().entrySet()) {
                 System.out.println("\t-> " + county.getKey());
+                for (Map.Entry<String, LocationInterface> city : county.getValue().getSubdivisions().entrySet()) {
+                    System.out.println("\t\t-> " + city.getKey());
+                }
             }
         }
         world.clear();
