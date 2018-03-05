@@ -1,19 +1,45 @@
+import classes.World;
+import interfaces.LocationInterface;
 import utils.Date;
 import utils.DateManager;
+import utils.LocationFactory;
 import utils.Reader;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
 //        dateManagerTest();
-        readerTest();
+//        readerTest();
+        hierarchyTest("./test_input_1");
+        hierarchyTest("./test_input_2");
+    }
+
+    private static void hierarchyTest(final String filePath) {
+        ArrayList<String> locations;
+        locations = Reader.getInstance().read(filePath);
+        for (String str : locations) {
+            LocationFactory.getInstance().factory(str);
+        }
+        LinkedHashMap<String, LocationInterface> world = World.getInstance().getCountries();
+
+        System.out.println("Testing " + filePath);
+        for (Map.Entry<String, LocationInterface> country : world.entrySet()) {
+            System.out.println("-> " + country.getKey());
+            for (Map.Entry<String, LocationInterface> county : country.getValue().getSubdivisions().entrySet()) {
+                System.out.println("\t-> " + county.getKey());
+            }
+        }
+        world.clear();
+        System.out.println("");
     }
 
     private static void readerTest() {
-        ArrayList<String> locations = new ArrayList<>();
-        locations = Reader.getInstance().read("/home/cacior/AB4_Holiday_App/input");
+        ArrayList<String> locations;
+        locations = Reader.getInstance().read("/home/cacior/AB4_Holiday_App/test_input_1");
         for (String str : locations) {
             System.out.println(str);
         }
