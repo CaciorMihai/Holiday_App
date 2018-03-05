@@ -9,4 +9,5 @@ public interface LocationInterface {
     Boolean isDestination();
     LinkedHashMap<String, LocationInterface> getSubdivisions();
     LinkedHashMap<String, Activity> getActivities();
+    void makeDestination(int setDailyPrice, String dates, String activities);
 }

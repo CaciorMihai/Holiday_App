@@ -58,7 +58,7 @@ public class LocationFactory {
                 }
 
                 if (parent.getSubdivisions().containsKey(cityName)) {
-
+                    parent.getSubdivisions().get(cityName).makeDestination(dailyPrice, dates, activities);
                 } else {
                     locationInstance = new City(name, dailyPrice, dates, activities);
                     parent.getSubdivisions().put(cityName, locationInstance);
@@ -73,7 +73,7 @@ public class LocationFactory {
                     country = world.getCountries().get(tokens[2]);
                 }
                 if (country.getSubdivisions().containsKey(name)) {
-                    // TODO
+                    country.getSubdivisions().get(name).makeDestination(dailyPrice, dates, activities);
                 } else {
                     locationInstance = new County(name, dailyPrice, dates, activities);
                     country.getSubdivisions().put(name, locationInstance);
@@ -81,7 +81,7 @@ public class LocationFactory {
                 break;
             case "Tara":
                 if (world.getCountries().containsKey(name)) {
-                    // TODO
+                    world.getCountries().get(name).makeDestination(dailyPrice, dates, activities);
                 } else {
                     locationInstance = new Country(name, dailyPrice, dates, activities);
                     world.getCountries().put(name, locationInstance);

@@ -29,11 +29,26 @@ public class Main {
 
         System.out.println("Testing " + filePath);
         for (Map.Entry<String, LocationInterface> country : world.entrySet()) {
-            System.out.println("-> " + country.getKey());
+            System.out.print("-> " + country.getKey());
+            if (country.getValue().isDestination()) {
+                System.out.println(" -d");
+            } else {
+                System.out.println("");
+            }
             for (Map.Entry<String, LocationInterface> county : country.getValue().getSubdivisions().entrySet()) {
-                System.out.println("\t-> " + county.getKey());
+                System.out.print("\t-> " + county.getKey());
+                if (county.getValue().isDestination()) {
+                    System.out.println(" -d");
+                } else {
+                    System.out.println("");
+                }
                 for (Map.Entry<String, LocationInterface> city : county.getValue().getSubdivisions().entrySet()) {
-                    System.out.println("\t\t-> " + city.getKey());
+                    System.out.print("\t\t-> " + city.getKey());
+                    if (city.getValue().isDestination()) {
+                        System.out.println(" -d");
+                    } else {
+                        System.out.println("");
+                    }
                 }
             }
         }

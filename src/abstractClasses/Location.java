@@ -17,6 +17,7 @@ public abstract class Location implements LocationInterface{
     public Location (String setName, int setDailyPrice, String dates, String activities) {
         this(setName);
         this.isDestination = true;
+        // todo
     }
 
     public Location (String setName) {
@@ -26,6 +27,12 @@ public abstract class Location implements LocationInterface{
         this.subdivisions = null;
         this.activities = null;
         subdivisions = new LinkedHashMap<>();
+    }
+
+    @Override
+    public void makeDestination(int setDailyPrice, String dates, String activities) {
+        this.isDestination = true;
+        // todo
     }
 
     @Override
