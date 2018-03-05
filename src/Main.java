@@ -12,8 +12,8 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-//        dateManagerTest();
-//        readerTest();
+        dateManagerTest();
+        readerTest();
         hierarchyTest("./test_input_1");
         hierarchyTest("./test_input_2");
     }
