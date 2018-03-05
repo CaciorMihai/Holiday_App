@@ -2,7 +2,7 @@ Cacior Mihai  05.03.2018
 
 Am stabilit ca formatul fisierului de input sa fie astfel:
 
-Locatie|Tip|Ierarhie|Perioada|Activitati
+Locatie|Tip|Ierarhie|Perioada|Pret pe zi|Activitati
 
 Pe fiecare linie este cate o locatie, informatiile sunt divizate de "|".
 1) Primul lucru este numele locatiei (Bucuresti, Cluj, Predeal sau Romania).
@@ -13,4 +13,5 @@ mai multe orase, un oras are mai multe cartiere/sectoare etc). Ierarhia trebuie
 sa fie neaparat completa, daca locatia este un oras acesa trebuie sa apartina
 unui judet care sa apartina unei tari.
 4) Perioada in care se poate visita.
-5) O lista de activitati.
+5) Pretul pe zi.
+6) O lista de activitati.

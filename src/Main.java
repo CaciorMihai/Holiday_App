@@ -1,10 +1,22 @@
 import utils.Date;
 import utils.DateManager;
+import utils.Reader;
+
+import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
-        dateManagerTest();
+//        dateManagerTest();
+        readerTest();
+    }
+
+    private static void readerTest() {
+        ArrayList<String> locations = new ArrayList<>();
+        locations = Reader.getInstance().read("/home/cacior/AB4_Holiday_App/input");
+        for (String str : locations) {
+            System.out.println(str);
+        }
     }
 
     private static void dateManagerTest() {
