@@ -75,6 +75,8 @@ public class LocationFactory {
                 } else {
                     locationInstance = new City(cityName, dailyPrice, dates, activities);
                     parent.getSubdivisions().put(cityName, locationInstance);
+                    parent.getSortedSubdivisions().put(locationInstance.getDailyPrice(),
+                            locationInstance);
                 }
                 break;
             case "Judet":
@@ -99,6 +101,8 @@ public class LocationFactory {
                 } else {
                     locationInstance = new County(countyName, dailyPrice, dates, activities);
                     country.getSubdivisions().put(countyName, locationInstance);
+                    country.getSortedSubdivisions().put(locationInstance.getDailyPrice(),
+                            locationInstance);
                 }
                 break;
             case "Tara":
@@ -111,6 +115,8 @@ public class LocationFactory {
                 } else {
                     locationInstance = new Country(countryName, dailyPrice, dates, activities);
                     world.getCountries().put(countryName, locationInstance);
+                    world.getSortedSubdivisions().put(locationInstance.getDailyPrice(),
+                            locationInstance);
                 }
                 break;
         }

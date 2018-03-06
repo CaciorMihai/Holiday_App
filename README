@@ -13,7 +13,7 @@ mai multe orase, un oras are mai multe cartiere/sectoare etc). Ierarhia trebuie
 sa fie neaparat completa, daca locatia este un oras acesa trebuie sa apartina
 unui judet care sa apartina unei tari.
 4) Perioada in care se poate visita.
-5) Pretul pe zi.
+5) Pretul pe zi pentru acea locatie.
 6) O lista de activitati.
 
 
@@ -35,3 +35,22 @@ Avem o clasa World care este radacina ierarhiei, aceasta contine o lista de tari
 si e singleton, ca si fabrica de locatii, pentru ca nu e corect conceptual sa
 avem mai mult de o instanta pentru fiecare.
 
+
+
+Cautari:
+1) Cautarea unei locatii trebuie facuta cu ierarhia completa pana la acea locatie
+(de exemplu daca vrem sa cautam Predeal cautam "Romania Brasov Predeal")
+Cautarea se efectueaza in timp constant deoarece folosesc LinkedHashMap pentru
+a stoca locatiile.
+
+2) Cautarea a celor N mai ieftine locatii unde se poate efectua o anumita 
+activitate intr-o perioada data.
+Toate activitatile sunt stocate intr-un LinkedHashMap in clasa World. Fiecare
+activitate memoreaza locatiile unde poate fi efectuata intr-un TreeMap sortat
+dupa pretul zilnic. Astfel aceasta cautare se efectueaza aproximativ in O(N) 
+(Depinde de numarul de locatii cu activitatea respetiva dar interval 
+necorespunzator).
+
+3) Cautarea a top N locatii din o Tara/ un Judet/un Oras din o anumita perioada.
+Fiecare locatie memoreaza locatiile si intr-un TreeMap ordonate dupa pret.
+Cautarea este efectuata in aproximativ O(N).

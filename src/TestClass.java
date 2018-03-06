@@ -21,6 +21,11 @@ public class TestClass {
     private TestClass() {
     }
 
+    public void queryTopLocationsTest(int top, String str, Date start, Date end) {
+        String[] tokens = str.split(" ");
+        System.out.println(World.getInstance().queryTopLocations(top, tokens, start, end));
+    }
+
     public void queryLocationTest(String str) {
         String[] tokens = str.split(" ");
         System.out.println(World.getInstance().queryLocationInfo(tokens));

@@ -3,16 +3,19 @@ package abstractClasses;
 import classes.Activity;
 import classes.World;
 import interfaces.LocationInterface;
+import sun.reflect.generics.tree.Tree;
 import utils.DateManager;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public abstract class Location implements LocationInterface{
     protected String name;
     protected boolean isDestination;
     protected LinkedHashMap<String, LocationInterface> subdivisions;
     protected LinkedHashMap<String, Activity> activities;
+    protected TreeMap<Integer, LocationInterface> sortedSubdivisions;
     protected int dailyPrice;
     private DateManager dateManager;
 
@@ -28,6 +31,7 @@ public abstract class Location implements LocationInterface{
         this.subdivisions = null;
         this.activities = null;
         subdivisions = new LinkedHashMap<>();
+        sortedSubdivisions = new TreeMap<>();
     }
 
     private void parseActivities(String activitiesString) {
@@ -40,6 +44,11 @@ public abstract class Location implements LocationInterface{
             activities.put(activity, World.getInstance().getActivities().get(activity));
             World.getInstance().getActivities().get(activity).getLocations().put(this.dailyPrice,this);
         }
+    }
+
+    @Override
+    public TreeMap<Integer, LocationInterface> getSortedSubdivisions() {
+        return sortedSubdivisions;
     }
 
     @Override
