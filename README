@@ -1,6 +1,11 @@
 Cacior Mihai  05.03.2018
 
 Aplicatia este un proiect Intellij.
+Executabilele se afla in directorul out iar in ./out/productions/AB4_Holiday_App
+se afla un makefile a carui run ruleaza aplicatia.
+
+Aplicatia are o interfata in consola si are un help care explica cum
+se interactioneaza cu aceasta.
 
 Am stabilit ca formatul fisierului de input sa fie astfel:
 
@@ -58,3 +63,6 @@ efectua in mai multe locatii cu acelas pret, numai una din ele este afisata.
 3) Cautarea a top N locatii din o Tara/ un Judet/un Oras din o anumita perioada.
 Fiecare locatie memoreaza locatiile si intr-un TreeMap ordonate dupa pret.
 Cautarea este efectuata in aproximativ O(N).
+
+Fiecare cautare are o metoda corespunazatoare in clasa World care returneaza
+informatiile dorite sub forma unui String.

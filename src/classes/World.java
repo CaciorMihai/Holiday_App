@@ -72,6 +72,15 @@ public class World {
 
         return str;
     }
+    public String parseQueryTopLocations(String input) {
+        String[] tokens = input.split("[,]");
+        int top = Integer.parseInt(tokens[0]);
+        Date start, end;
+        start = new Date(tokens[2].split("[-]")[0]);
+        end = new Date(tokens[2].split("[-]")[1]);
+        String[] location = tokens[1].split(" ");
+        return queryTopLocations(top, location, start, end);
+    }
 
     /**
      * A method that returns the names of the cheapest locations where we can to a certain activity.
@@ -99,6 +108,15 @@ public class World {
         }
         return str;
     }
+    public String parseQueryActivityLocations(String input) {
+        String[] tokens = input.split("[,]");
+        int top = Integer.parseInt(tokens[0]);
+        Date start, end;
+        start = new Date(tokens[2].split("[-]")[0]);
+        end = new Date(tokens[2].split("[-]")[1]);
+        String activity = tokens[1];
+        return queryActivityLocations(top, activity, start, end);
+    }
 
     /**
      * A method that searches a certain location and returns all the info about it.
@@ -111,6 +129,16 @@ public class World {
             return "Destination not found!";
         }
         return location.toString();
+    }
+    public String parseQueryLocationInfo(String input) {
+        String[] tokens = input.split(" ");
+        return queryLocationInfo(tokens);
+    }
+
+    public void clear() {
+        sortedSubdivisions.clear();
+        countries.clear();
+        activities.clear();
     }
 
     public TreeMap<Integer, LocationInterface> getSortedSubdivisions() {
