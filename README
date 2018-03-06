@@ -1,6 +1,6 @@
 Cacior Mihai  05.03.2018
 
-Aplicatia este un proiect Intellij.
+Aplicatia este un proiect IntelliJ.
 Executabilele se afla in directorul out iar in ./out/productions/AB4_Holiday_App
 se afla un makefile a carui run ruleaza aplicatia.
 
