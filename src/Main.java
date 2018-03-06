@@ -1,3 +1,4 @@
+import classes.Activity;
 import classes.World;
 import interfaces.LocationInterface;
 import utils.Date;
@@ -8,15 +9,29 @@ import utils.Reader;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Main {
 
     public static void main(String[] args) {
 //        dateManagerTest();
 //        readerTest();
-        hierarchyTest("./test_input_1");
-        hierarchyTest("./test_input_2");
-        hierarchyTest("./test_input_3");
+//        hierarchyTest("./test_input_1");
+//        hierarchyTest("./test_input_2");
+//        hierarchyTest("./test_input_3");
+
+        TreeMap<Integer, String> m = new TreeMap<>();
+
+        m.put(4, "patru");
+        m.put(2, "doi");
+        m.put(6, "sase");
+        m.put(3, "trei");
+        m.put(1, "unu");
+        m.put(5, "cinci");
+
+        for (Map.Entry<Integer, String> entry : m.entrySet()) {
+            System.out.println(entry.getValue());
+        }
     }
 
     private static void hierarchyTest(final String filePath) {
@@ -30,25 +45,13 @@ public class Main {
         System.out.println("Testing " + filePath);
         for (Map.Entry<String, LocationInterface> country : world.entrySet()) {
             System.out.print("-> " + country.getKey());
-            if (country.getValue().isDestination()) {
-                System.out.println(" -d");
-            } else {
-                System.out.println("");
-            }
+            printActivities(country.getValue());
             for (Map.Entry<String, LocationInterface> county : country.getValue().getSubdivisions().entrySet()) {
                 System.out.print("\t-> " + county.getKey());
-                if (county.getValue().isDestination()) {
-                    System.out.println(" -d");
-                } else {
-                    System.out.println("");
-                }
+                printActivities(county.getValue());
                 for (Map.Entry<String, LocationInterface> city : county.getValue().getSubdivisions().entrySet()) {
                     System.out.print("\t\t-> " + city.getKey());
-                    if (city.getValue().isDestination()) {
-                        System.out.println(" -d");
-                    } else {
-                        System.out.println("");
-                    }
+                    printActivities(city.getValue());
                 }
             }
         }
@@ -56,9 +59,20 @@ public class Main {
         System.out.println("");
     }
 
+    private static void printActivities(LocationInterface loc) {
+        if (loc.isDestination()) {
+            System.out.print(": ");
+            for (Map.Entry<String, Activity> a : loc.getActivities().entrySet()) {
+                System.out.print(a.getKey() + ", ");
+            }
+            System.out.print(" Interval:" + loc.getDateManager() + " Price:" + loc.getDailyPrice());
+        }
+        System.out.println("");
+    }
+
     private static void readerTest() {
         ArrayList<String> locations;
-        locations = Reader.getInstance().read("/home/cacior/AB4_Holiday_App/test_input_1");
+        locations = Reader.getInstance().read("./test_input_1");
         for (String str : locations) {
             System.out.println(str);
         }

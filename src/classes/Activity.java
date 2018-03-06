@@ -5,7 +5,7 @@ import interfaces.ActivityInterface;
 public class Activity implements ActivityInterface {
     private String name;
 
-    Activity(String setName) {
+    public Activity(String setName) {
         this.name = setName;
     }
 

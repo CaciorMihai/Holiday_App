@@ -25,7 +25,6 @@ public class LocationFactory {
             System.out.println("Input error");
             return;
         }
-        String name = tokens[0];
         String dates = tokens[3];
         int dailyPrice = Integer.parseInt(tokens[4].trim());
         String activities = tokens[5];
@@ -35,13 +34,21 @@ public class LocationFactory {
         String countyName;
         String countryName;
 
+        LocationInterface city;
+        LocationInterface county;
+        LocationInterface country;
+
         switch (tokens[1]) {
             default:
                 break;
             case "Oras":
                 cityName = tokens[0];
-                countyName = tokens[2].split(" ")[1];
                 countryName = tokens[2].split(" ")[0];
+                countyName = tokens[2].split(" ")[1];
+
+                /*
+                 * Check if the country of the city exists, create it if it dose not.
+                 */
                 if (world.getCountries().containsKey(countryName)) {
                     parent = world.getCountries().get(countryName);
                 } else {
@@ -49,6 +56,9 @@ public class LocationFactory {
                     world.getCountries().put(countryName, parent);
                 }
 
+                /*
+                 * Check if the county of the city exists, create it if it dose not.
+                 */
                 if (parent.getSubdivisions().containsKey(countyName)) {
                     parent = parent.getSubdivisions().get(countyName);
                 } else {
@@ -57,34 +67,50 @@ public class LocationFactory {
                     parent = aux;
                 }
 
+                /*
+                 * Check if the city exists, create it if it dose not.
+                 */
                 if (parent.getSubdivisions().containsKey(cityName)) {
                     parent.getSubdivisions().get(cityName).makeDestination(dailyPrice, dates, activities);
                 } else {
-                    locationInstance = new City(name, dailyPrice, dates, activities);
+                    locationInstance = new City(cityName, dailyPrice, dates, activities);
                     parent.getSubdivisions().put(cityName, locationInstance);
                 }
                 break;
             case "Judet":
-                LocationInterface country;
-                if (!world.getCountries().containsKey(tokens[2])) {
-                    country = new Country(tokens[2]);
-                    world.getCountries().put(tokens[2], country);
+                countryName = tokens[2];
+                countyName = tokens[0];
+
+                /*
+                 * Check if the country of the county exists, create it if it dose not.
+                 */
+                if (!world.getCountries().containsKey(countryName)) {
+                    country = new Country(countryName);
+                    world.getCountries().put(countryName, country);
                 } else {
-                    country = world.getCountries().get(tokens[2]);
+                    country = world.getCountries().get(countryName);
                 }
-                if (country.getSubdivisions().containsKey(name)) {
-                    country.getSubdivisions().get(name).makeDestination(dailyPrice, dates, activities);
+
+                /*
+                 * Check if the county exists, create it if it dose not.
+                 */
+                if (country.getSubdivisions().containsKey(countyName)) {
+                    country.getSubdivisions().get(countyName).makeDestination(dailyPrice, dates, activities);
                 } else {
-                    locationInstance = new County(name, dailyPrice, dates, activities);
-                    country.getSubdivisions().put(name, locationInstance);
+                    locationInstance = new County(countyName, dailyPrice, dates, activities);
+                    country.getSubdivisions().put(countyName, locationInstance);
                 }
                 break;
             case "Tara":
-                if (world.getCountries().containsKey(name)) {
-                    world.getCountries().get(name).makeDestination(dailyPrice, dates, activities);
+                countryName = tokens[0];
+                /*
+                 * Check if the country exists, create it if it dose not.
+                 */
+                if (world.getCountries().containsKey(countryName)) {
+                    world.getCountries().get(countryName).makeDestination(dailyPrice, dates, activities);
                 } else {
-                    locationInstance = new Country(name, dailyPrice, dates, activities);
-                    world.getCountries().put(name, locationInstance);
+                    locationInstance = new Country(countryName, dailyPrice, dates, activities);
+                    world.getCountries().put(countryName, locationInstance);
                 }
                 break;
         }

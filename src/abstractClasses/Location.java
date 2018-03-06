@@ -1,6 +1,7 @@
 package abstractClasses;
 
 import classes.Activity;
+import classes.World;
 import interfaces.LocationInterface;
 import utils.DateManager;
 
@@ -16,8 +17,7 @@ public abstract class Location implements LocationInterface{
 
     public Location (String setName, int setDailyPrice, String dates, String activities) {
         this(setName);
-        this.isDestination = true;
-        // todo
+        makeDestination(setDailyPrice, dates, activities);
     }
 
     public Location (String setName) {
@@ -29,10 +29,24 @@ public abstract class Location implements LocationInterface{
         subdivisions = new LinkedHashMap<>();
     }
 
+    private void parseActivities(String activitiesString) {
+        String[] tokens = activitiesString.split("[,]");
+        for (String activity : tokens) {
+            activity = activity.trim();
+            if (!World.getInstance().getActivities().containsKey(activity)) {
+                World.getInstance().getActivities().put(activity, new Activity(activity));
+            }
+            activities.put(activity, World.getInstance().getActivities().get(activity));
+        }
+    }
+
     @Override
-    public void makeDestination(int setDailyPrice, String dates, String activities) {
+    public void makeDestination(int setDailyPrice, String dates, String activitiesString) {
         this.isDestination = true;
-        // todo
+        this.dailyPrice = setDailyPrice;
+        dateManager = new DateManager(dates);
+        activities = new LinkedHashMap<>();
+        parseActivities(activitiesString);
     }
 
     @Override
@@ -53,5 +67,15 @@ public abstract class Location implements LocationInterface{
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public DateManager getDateManager() {
+        return dateManager;
+    }
+
+    @Override
+    public int getDailyPrice() {
+        return dailyPrice;
     }
 }

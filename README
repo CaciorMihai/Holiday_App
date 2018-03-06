@@ -15,3 +15,23 @@ unui judet care sa apartina unei tari.
 4) Perioada in care se poate visita.
 5) Pretul pe zi.
 6) O lista de activitati.
+
+
+
+Ierarhia este construita astfel:
+Toate locatiile (Tarile, Judetele, Orasele, Cartierele etc) sunt un obiect
+care extinde clasa abstracta Location. Aceasta clasa abstracta contine tot
+comportamentul unei destinatii turistice (lista de activitati, perioada, pretul)
+dar si o lista de subdivizii (o lista de Judete pt o Tara de exemplu).
+
+Locatiile concrete extind Locatie dar nu adauga nici o functionalitate noua.
+
+Ierarhia poate fi extinsa usor prin crearea unei clase noi (sa zicem clasa
+Cartier) si adaugarea tipului in fabrica de locatii (mai scriem un caz in
+switch care adauga cartierul in ierarhie, daca orasul/judetul/tara nu sunt
+deja in ierarhie le adauga acum).
+
+Avem o clasa World care este radacina ierarhiei, aceasta contine o lista de tari
+si e singleton, ca si fabrica de locatii, pentru ca nu e corect conceptual sa
+avem mai mult de o instanta pentru fiecare.
+
