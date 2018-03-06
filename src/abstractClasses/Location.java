@@ -6,6 +6,7 @@ import interfaces.LocationInterface;
 import utils.DateManager;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public abstract class Location implements LocationInterface{
     protected String name;
@@ -37,6 +38,7 @@ public abstract class Location implements LocationInterface{
                 World.getInstance().getActivities().put(activity, new Activity(activity));
             }
             activities.put(activity, World.getInstance().getActivities().get(activity));
+            World.getInstance().getActivities().get(activity).getLocations().put(this.dailyPrice,this);
         }
     }
 
@@ -77,5 +79,20 @@ public abstract class Location implements LocationInterface{
     @Override
     public int getDailyPrice() {
         return dailyPrice;
+    }
+
+    @Override
+    public String toString() {
+        if (!isDestination) {
+            return name + " is not a touristic destination!";
+        }
+        String info = "";
+        info += name;
+        info += " " + dateManager;
+        info += " " + dailyPrice + "/day ";
+        for (Map.Entry<String, Activity> a : activities.entrySet()) {
+            info += a.getKey() + ";";
+        }
+        return info;
     }
 }

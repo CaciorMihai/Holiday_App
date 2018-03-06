@@ -1,5 +1,8 @@
 package interfaces;
 
+import java.util.TreeMap;
+
 public interface ActivityInterface {
-    String GetName();
+    String getName();
+    TreeMap<Integer, LocationInterface> getLocations();
 }

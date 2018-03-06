@@ -16,22 +16,25 @@ public class Main {
     public static void main(String[] args) {
 //        dateManagerTest();
 //        readerTest();
-//        hierarchyTest("./test_input_1");
-//        hierarchyTest("./test_input_2");
-//        hierarchyTest("./test_input_3");
 
-        TreeMap<Integer, String> m = new TreeMap<>();
+        System.out.println("\n====== Hierarchy Test ======");
+        hierarchyTest("./input");
 
-        m.put(4, "patru");
-        m.put(2, "doi");
-        m.put(6, "sase");
-        m.put(3, "trei");
-        m.put(1, "unu");
-        m.put(5, "cinci");
+        System.out.println("\n==== Location Query Test ====");
+        queryLocationTest("Romania Brasov Predeal");
+        queryLocationTest("Romania Brasov");
+        queryLocationTest("Romania Olt");
 
-        for (Map.Entry<Integer, String> entry : m.entrySet()) {
-            System.out.println(entry.getValue());
-        }
+        System.out.println("\n==== Activity Query Test ====");
+        String str;
+        str = World.getInstance().queryActivityLocations(5,"Gratar",
+                new Date("10:02"), new Date("15:02"));
+        System.out.println(str);
+    }
+
+    private static void queryLocationTest(String str) {
+        String[] tokens = str.split(" ");
+        System.out.println(World.getInstance().queryLocationInfo(tokens));
     }
 
     private static void hierarchyTest(final String filePath) {
@@ -42,7 +45,6 @@ public class Main {
         }
         LinkedHashMap<String, LocationInterface> world = World.getInstance().getCountries();
 
-        System.out.println("Testing " + filePath);
         for (Map.Entry<String, LocationInterface> country : world.entrySet()) {
             System.out.print("-> " + country.getKey());
             printActivities(country.getValue());
@@ -55,7 +57,6 @@ public class Main {
                 }
             }
         }
-        world.clear();
         System.out.println("");
     }
 
