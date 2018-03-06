@@ -9,6 +9,9 @@ import java.util.TreeMap;
 
 /**
  * The root of the Hierarchy Tree.
+ * Contains all the countries in a LinkedHashMap for easy searching and in a TreeMap, sorted after
+ * the price.
+ * Contains all the activities from all the locations in a LinkedHashMap for easy searching.
  */
 public class World {
     private static World ourInstance = new World();
@@ -42,6 +45,14 @@ public class World {
         return location;
     }
 
+    /**
+     * A method that returns the names of the cheapest locations.
+     * @param top Number of returned locations
+     * @param query The root of witch we search the top locations.
+     * @param start The start date.
+     * @param end The end date.
+     * @return A string with the first top locations with their price separated by ";"
+     */
     public String queryTopLocations(int top, String[] query, Date start, Date end) {
         String str = "";
         LocationInterface location = queryLocation(query);
@@ -62,6 +73,14 @@ public class World {
         return str;
     }
 
+    /**
+     * A method that returns the names of the cheapest locations where we can to a certain activity.
+     * @param top Number of locations to be returned.
+     * @param activity The activity we want.
+     * @param start The start date.
+     * @param end The end date.
+     * @return
+     */
     public String queryActivityLocations(int top, String activity, Date start, Date end) {
         String str = "";
         Activity a;
@@ -81,6 +100,11 @@ public class World {
         return str;
     }
 
+    /**
+     * A method that searches a certain location and returns all the info about it.
+     * @param query The path to the location.
+     * @return
+     */
     public String queryLocationInfo(String[] query) {
         LocationInterface location = queryLocation(query);
         if (location == null) {

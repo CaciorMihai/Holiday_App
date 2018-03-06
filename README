@@ -1,5 +1,7 @@
 Cacior Mihai  05.03.2018
 
+Aplicatia este un proiect Intellij.
+
 Am stabilit ca formatul fisierului de input sa fie astfel:
 
 Locatie|Tip|Ierarhie|Perioada|Pret pe zi|Activitati

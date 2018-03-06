@@ -3,7 +3,6 @@ package abstractClasses;
 import classes.Activity;
 import classes.World;
 import interfaces.LocationInterface;
-import sun.reflect.generics.tree.Tree;
 import utils.DateManager;
 
 import java.util.LinkedHashMap;
@@ -34,6 +33,10 @@ public abstract class Location implements LocationInterface{
         sortedSubdivisions = new TreeMap<>();
     }
 
+    /**
+     * Adds the activities from the input string to this location.
+     * @param activitiesString a string of activities, separeted by ","
+     */
     private void parseActivities(String activitiesString) {
         String[] tokens = activitiesString.split("[,]");
         for (String activity : tokens) {

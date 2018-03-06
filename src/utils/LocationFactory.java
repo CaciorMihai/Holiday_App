@@ -16,10 +16,13 @@ public class LocationFactory {
     private LocationFactory() {
     }
 
+    /**
+     *
+     * @param location A string that contains all the information about a location.
+     */
     public void factory(String location) {
         World world = World.getInstance();
         String[] tokens = location.split("[|]");
-//        LocationInterface locationInstance;
 
         if (tokens.length != 6) {
             System.out.println("Input error");
@@ -29,7 +32,6 @@ public class LocationFactory {
         int dailyPrice = Integer.parseInt(tokens[4].trim());
         String activities = tokens[5];
 
-//        LocationInterface parent;
         String cityName;
         String countyName;
         String countryName;

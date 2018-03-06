@@ -32,7 +32,6 @@ public class DateManager {
             }
             return false;
         } else { // If start is bigger than end then new year is in between them.
-            Date newYears = new Date("31:12");
             if (date.compareTo(start) >= 0) {
                 return true;
             }
