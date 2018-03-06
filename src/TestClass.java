@@ -62,7 +62,7 @@ public class TestClass {
 
     public void readerTest(final String filePath) {
         ArrayList<String> locations;
-        locations = Reader.getInstance().read("./test_input_1");
+        locations = Reader.getInstance().read(filePath);
         for (String str : locations) {
             LocationFactory.getInstance().factory(str);
             System.out.println(str);

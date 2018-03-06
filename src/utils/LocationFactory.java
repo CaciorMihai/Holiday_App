@@ -19,7 +19,7 @@ public class LocationFactory {
     public void factory(String location) {
         World world = World.getInstance();
         String[] tokens = location.split("[|]");
-        LocationInterface locationInstance;
+//        LocationInterface locationInstance;
 
         if (tokens.length != 6) {
             System.out.println("Input error");
@@ -29,7 +29,7 @@ public class LocationFactory {
         int dailyPrice = Integer.parseInt(tokens[4].trim());
         String activities = tokens[5];
 
-        LocationInterface parent;
+//        LocationInterface parent;
         String cityName;
         String countyName;
         String countryName;
@@ -50,33 +50,32 @@ public class LocationFactory {
                  * Check if the country of the city exists, create it if it dose not.
                  */
                 if (world.getCountries().containsKey(countryName)) {
-                    parent = world.getCountries().get(countryName);
+                    country = world.getCountries().get(countryName);
                 } else {
-                    parent = new Country(countryName);
-                    world.getCountries().put(countryName, parent);
+                    country = new Country(countryName);
+                    world.getCountries().put(countryName, country);
                 }
 
                 /*
                  * Check if the county of the city exists, create it if it dose not.
                  */
-                if (parent.getSubdivisions().containsKey(countyName)) {
-                    parent = parent.getSubdivisions().get(countyName);
+                if (country.getSubdivisions().containsKey(countyName)) {
+                    county = country.getSubdivisions().get(countyName);
                 } else {
-                    LocationInterface aux = new Country(countyName);
-                    parent.getSubdivisions().put(countyName, aux);
-                    parent = aux;
+                    county = new Country(countyName);
+                    country.getSubdivisions().put(countyName, county);
                 }
 
                 /*
                  * Check if the city exists, create it if it dose not.
                  */
-                if (parent.getSubdivisions().containsKey(cityName)) {
-                    parent.getSubdivisions().get(cityName).makeDestination(dailyPrice, dates, activities);
+                if (county.getSubdivisions().containsKey(cityName)) {
+                    county.getSubdivisions().get(cityName).makeDestination(dailyPrice, dates,
+                            activities);
                 } else {
-                    locationInstance = new City(cityName, dailyPrice, dates, activities);
-                    parent.getSubdivisions().put(cityName, locationInstance);
-                    parent.getSortedSubdivisions().put(locationInstance.getDailyPrice(),
-                            locationInstance);
+                    city = new City(cityName, dailyPrice, dates, activities);
+                    county.getSubdivisions().put(cityName, city);
+                    county.getSortedSubdivisions().put(city.getDailyPrice(), city);
                 }
                 break;
             case "Judet":
@@ -99,10 +98,9 @@ public class LocationFactory {
                 if (country.getSubdivisions().containsKey(countyName)) {
                     country.getSubdivisions().get(countyName).makeDestination(dailyPrice, dates, activities);
                 } else {
-                    locationInstance = new County(countyName, dailyPrice, dates, activities);
-                    country.getSubdivisions().put(countyName, locationInstance);
-                    country.getSortedSubdivisions().put(locationInstance.getDailyPrice(),
-                            locationInstance);
+                    county = new County(countyName, dailyPrice, dates, activities);
+                    country.getSubdivisions().put(countyName, county);
+                    country.getSortedSubdivisions().put(county.getDailyPrice(), county);
                 }
                 break;
             case "Tara":
@@ -113,10 +111,9 @@ public class LocationFactory {
                 if (world.getCountries().containsKey(countryName)) {
                     world.getCountries().get(countryName).makeDestination(dailyPrice, dates, activities);
                 } else {
-                    locationInstance = new Country(countryName, dailyPrice, dates, activities);
-                    world.getCountries().put(countryName, locationInstance);
-                    world.getSortedSubdivisions().put(locationInstance.getDailyPrice(),
-                            locationInstance);
+                    country = new Country(countryName, dailyPrice, dates, activities);
+                    world.getCountries().put(countryName, country);
+                    world.getSortedSubdivisions().put(country.getDailyPrice(), country);
                 }
                 break;
         }

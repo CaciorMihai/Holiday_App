@@ -7,6 +7,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * The root of the Hierarchy Tree.
+ */
 public class World {
     private static World ourInstance = new World();
     private LinkedHashMap<String, LocationInterface> countries;
@@ -20,6 +23,7 @@ public class World {
     private World() {
         countries = new LinkedHashMap<>();
         activities = new LinkedHashMap<>();
+        sortedSubdivisions = new TreeMap<>();
     }
 
     private LocationInterface queryLocation(String[] query) {
