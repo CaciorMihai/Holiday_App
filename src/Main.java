@@ -22,7 +22,9 @@ public class Main {
                 "3 to get the cheapest locations.\n" +
                 "4 to show this help.\n" +
                 "5 to exit.\n" +
-                "6 to run some tests\n" +
+                "6 to show all locations.\n" +
+                "7 to show all activities.\n" +
+                "8 to run some tests\n" +
                 "\n" +
                 "1 - Searching a locations is done by entering the path to it\n" +
                 "\t(\"Country,County,City\")\n" +
@@ -54,14 +56,19 @@ public class Main {
                     System.out.println("Invalid option");
                     break;
                 case 1:
+                    System.out.println("Input format must be: " + "\"Country,County,City\"");
                     str = s.nextLine();
                     System.out.println(world.parseQueryLocationInfo(str));
                     break;
                 case 2:
+                    System.out.println("Input format must be: " + "\"10,Activity,01:01-31:12\"" +
+                            " The time interval may be replaced by any char for any time interval");
                     str = s.nextLine();
                     System.out.println(world.parseQueryActivityLocations(str));
                     break;
                 case 3:
+                    System.out.println("Input format must be: " + "\"5,Country County,02:01-30:12\"" +
+                            " The time interval may be replaced by any char for any time interval");
                     str = s.nextLine();
                     System.out.println(world.parseQueryTopLocations(str));
                     break;
@@ -71,6 +78,12 @@ public class Main {
                 case 5:
                     return;
                 case 6:
+                    TestClass.getInstance().hierarchyTest();
+                    break;
+                case 7:
+                    System.out.println(world.displayAllActivities());
+                    break;
+                case 8:
                     runTests();
                     break;
             }

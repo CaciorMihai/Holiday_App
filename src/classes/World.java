@@ -46,6 +46,18 @@ public class World {
     }
 
     /**
+     * This method returns all the activities in the World for you to choose.
+     * @return All the activities in a String, separated by comma.
+     */
+    public String displayAllActivities() {
+        String str = "";
+        for (Map.Entry<String, Activity> a : activities.entrySet()) {
+            str += a.getKey() + ",";
+        }
+        return str;
+    }
+
+    /**
      * A method that returns the names of the cheapest locations.
      * @param top Number of returned locations
      * @param query The root of witch we search the top locations.
@@ -59,10 +71,15 @@ public class World {
 
         if (location != null) {
             for (Map.Entry<Integer, LocationInterface> l : location.getSortedSubdivisions().entrySet()) {
-                if (l.getValue().getDateManager().contains(start) &&
-                        l.getValue().getDateManager().contains(end)) {
-                    str += l.getValue().getName() + " " + l.getKey() + "/day; ";
+                if (start == null || end == null) {
+                    str += l.getValue() + "\n";
                     top--;
+                } else {
+                    if (l.getValue().getDateManager().contains(start) &&
+                            l.getValue().getDateManager().contains(end)) {
+                        str += l.getValue() + "\n";
+                        top--;
+                    }
                 }
                 if (top <= 0) {
                     break;
@@ -76,8 +93,13 @@ public class World {
         String[] tokens = input.split("[,]");
         int top = Integer.parseInt(tokens[0]);
         Date start, end;
-        start = new Date(tokens[2].split("[-]")[0]);
-        end = new Date(tokens[2].split("[-]")[1]);
+        if (tokens[2].split("[-]").length != 2) {
+            start = null;
+            end = null;
+        } else {
+            start = new Date(tokens[2].split("[-]")[0]);
+            end = new Date(tokens[2].split("[-]")[1]);
+        }
         String[] location = tokens[1].split(" ");
         return queryTopLocations(top, location, start, end);
     }
@@ -96,10 +118,16 @@ public class World {
         if (activities.containsKey(activity)) {
             a = activities.get(activity);
             for (Map.Entry<Integer, LocationInterface> l : a.getLocations().entrySet()) {
-                if (l.getValue().getDateManager().contains(start) &&
-                        l.getValue().getDateManager().contains(end)) {
-                    str += l.getValue().getName() + " " + l.getKey() + "/day; ";
+                if (start == null || end == null) {
+                    str += l.getValue() + "\n";
                     top--;
+                } else {
+                    if (l.getValue().getDateManager().contains
+                            (start) &&
+                            l.getValue().getDateManager().contains(end)) {
+                        str += l.getValue() + "\n";
+                        top--;
+                    }
                 }
                 if (top <= 0) {
                     break;
@@ -112,8 +140,13 @@ public class World {
         String[] tokens = input.split("[,]");
         int top = Integer.parseInt(tokens[0]);
         Date start, end;
-        start = new Date(tokens[2].split("[-]")[0]);
-        end = new Date(tokens[2].split("[-]")[1]);
+        if (tokens[2].split("[-]").length != 2) {
+            start = null;
+            end = null;
+        } else {
+            start = new Date(tokens[2].split("[-]")[0]);
+            end = new Date(tokens[2].split("[-]")[1]);
+        }
         String activity = tokens[1];
         return queryActivityLocations(top, activity, start, end);
     }

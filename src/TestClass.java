@@ -50,13 +50,13 @@ public class TestClass {
     }
 
     public void printActivities(LocationInterface loc) {
-        if (loc.isDestination()) {
-            System.out.print(": ");
-            for (Map.Entry<String, Activity> a : loc.getActivities().entrySet()) {
-                System.out.print(a.getKey() + ", ");
-            }
-            System.out.print(" Interval:" + loc.getDateManager() + " Price:" + loc.getDailyPrice());
-        }
+//        if (loc.isDestination()) {
+//            System.out.print(": ");
+//            for (Map.Entry<String, Activity> a : loc.getActivities().entrySet()) {
+//                System.out.print(a.getKey() + ", ");
+//            }
+//            System.out.print(" Interval:" + loc.getDateManager() + " Price:" + loc.getDailyPrice());
+//        }
         System.out.println("");
     }
 
